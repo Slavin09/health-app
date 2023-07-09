@@ -16,6 +16,32 @@ const {getRootProps, getInputProps}= useDropzone({
         console.log(acceptedFiles);
     }
 })
+import {NavLink,useHistory} from 'react-router-dom';
+const PostData =async (e) => {
+    e.preventDefault();
+    const {username,wallet_address} = user;
+    const res = await fetch("/UserData",{
+        method:"POST",
+        headers:{
+            "Content-Type" : "application/json"
+        },
+        body:JSON.stringify({
+            username: username,
+            wallet_address: address
+        })
+    });
+
+    const res = await res.json();
+    if (data.status === 422 || !data ){
+        window.alert("Invalid registration");
+        console.log("Invalid registration");
+    }
+    else {
+        window.alert("Successful registration");
+        console.log("Successful registration");
+        history.push("/login");
+    }
+}
 
 const images=files.map(file => (
 <img className='Uploaded-Img' key={file.name} src={file.preview} alt="image" />
@@ -38,7 +64,7 @@ const images=files.map(file => (
                 </Search>
                 <Form>
                     <h1>Enter Prescription</h1>
-                    <form >
+                    <form method="POST" className="register-form" id="register-form" >
                         <Drag>
                         <div class="container" {...getRootProps()}> 
                         <div class="header" className="dropzone"> 
@@ -51,7 +77,7 @@ const images=files.map(file => (
                         </div>
                         
                         </Drag>
-                        <button type="submit">Show Text</button>
+                        <button type="submit" value="register" onClick{PostData} >Show Text</button>
                     </form>
                 </Form>
             </SubBox>
