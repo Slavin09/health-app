@@ -4,6 +4,21 @@ import { useState, useRef } from "react";
 import {useDropzone} from 'react-dropzone'
 
 function UserData() {
+const [user,setUser]=useState({
+    name: "",address: ""
+});
+const history = useHistory();
+
+let name, value;
+const handleInputs =(e)=>{
+    console.log(e);
+    name=e.target.value;
+    value=e.target.value;
+
+    setUser({...user, [name]:value})
+}
+
+
 let [files, setFile] = useState([])
 const {getRootProps, getInputProps}= useDropzone({
     accept: "image/*",
@@ -16,6 +31,33 @@ const {getRootProps, getInputProps}= useDropzone({
         console.log(acceptedFiles);
     }
 })
+
+const {NavLink,useHistory} = require('react-router-dom');
+const PostData =async (e,res) => {
+    e.preventDefault();
+    const {username,wallet_address} = user;
+    const res = await fetch("/UserData",{
+        method:"POST",
+        headers:{
+            "Content-Type" : "application/json"
+        },
+        body:JSON.stringify({
+            username: username,
+            wallet_address: address
+        })
+    });
+
+    const res = await res.json();
+    if (data.status === 422 || !data ){
+        window.alert("Invalid registration");
+        console.log("Invalid registration");
+    }
+    else {
+        window.alert("Successful registration");
+        console.log("Successful registration");
+        history.push("/login");
+    }
+}
 
 const images=files.map(file => (
 <img className='Uploaded-Img' key={file.name} src={file.preview} alt="image" />
@@ -30,8 +72,8 @@ const images=files.map(file => (
                     <h1>Search Patient</h1>
                     <form action= " "> 
                     <div class="search">
-                        <input placeholder="Enter Name..." type="text"/>
-                        <input placeholder="Enter Email..." type="text"/>
+                        <input placeholder="Enter Name..." type="text" id="Name"/>
+                        <input placeholder="Enter Address..." type="text" id="Address"/>
                     </div>
                     <button type="submit">Search</button>
                     </form>
