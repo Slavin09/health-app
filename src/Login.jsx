@@ -70,7 +70,7 @@ const UserImg = styled.img`
     height: 48px;
     border-radius: 50px;
     cursor: pointer;
-  `;
+  `
 
   const DropDown = styled.div`
     height: 80px;
@@ -88,4 +88,4 @@ const UserImg = styled.img`
       color: white;
       width: 100%;
     }
-  `;
+  `

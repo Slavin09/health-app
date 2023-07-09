@@ -6,7 +6,7 @@ function Directory() {
     <Container>
         <a href="/form">
             <Record>
-                <h1> Start Recording</h1>
+                <h1> Upload Document</h1>
             </Record>
         </a>
         <Learn>

@@ -1,6 +1,7 @@
 import React, { useState } from 'react'
 import Parent from './Parent'
 import Forms from './Forms'
+import UserData from './UserData'
 import './App.css'
 
 import {
@@ -9,7 +10,6 @@ import {
   Route,
   Link
 } from "react-router-dom";
-import QnA from './QnA';
 
 function App() {
 
@@ -19,7 +19,7 @@ function App() {
         <Forms/> */}
         <Router>
         <Routes>
-          <Route path="form" element={<Forms/>}/>
+          <Route path="form" element={<UserData/>}/>
           <Route path='/' element={<Parent/>}/>
         </Routes>
       </Router>
