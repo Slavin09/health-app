@@ -48,8 +48,4 @@ user_data
     .then(
         () => console.log("One entry added"), 
         (err) => console.log(err)
-<<<<<<< HEAD
     );
-=======
-    );
->>>>>>> 8af869665ec4e83983f56c5ffbaaf3647cf396dd
