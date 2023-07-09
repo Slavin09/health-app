@@ -30,9 +30,10 @@ const images=files.map(file => (
                     <h1>Search Patient</h1>
                     <form action= " "> 
                     <div class="search">
-                    <input placeholder="Search address..." type="text"/>
-                    <button type="submit">Go</button>
+                        <input placeholder="Enter Name..." type="text"/>
+                        <input placeholder="Enter Email..." type="text"/>
                     </div>
+                    <button type="submit">Search</button>
                     </form>
                 </Search>
                 <Form>
@@ -71,7 +72,7 @@ const Drag=styled.div`
 `
 
 const Container=styled.div`
-height: 140vh;
+height: 100vh;
 width: 100%;
 background-image: linear-gradient(40deg, rgb(0, 3, 6), rgb(1, 42, 73));
 display: flex;
@@ -132,14 +133,24 @@ button[type="submit"]:active {
 const Search=styled.div`
 display: inline-block;
 position: relative;
-margin: 5% auto 7% 33%;
+text-align: center;
+margin: 5% auto 5% ;
 
   input[type="text"] {
   width: 400px;
   padding: 10px;
+  margin-left: 1rem;
   border: none;
   border-radius: 20px;
   box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  
+  }
+  .search{
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    margin-left: 12.2rem;
+    margin-top: 3rem;
   }
 
   button[type="submit"] {
@@ -150,7 +161,8 @@ margin: 5% auto 7% 33%;
   padding: 10px 20px;
   border-radius: 20px;
   box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-  position: relative;
+  margin: 2rem auto auto 13rem; 
+  
   top: 0;
   right: 0;
   left: -55px;
@@ -164,20 +176,20 @@ margin: 5% auto 7% 33%;
 }
 h1{
    color: rgb(125, 215, 255);
-   margin-left: 20%;
+   margin-left: 14rem;
 }
 `
 
 const RefBox=styled.div`
 width: 100%;
-height: 140vh;
+height: 100vh;
 display: flex;
 justify-content: center;
 align-items: center;
 `
 const SubBox=styled.div`
 width: 80rem;
-height: 110vh;
+height: 90vh;
 margin: auto;
 box-shadow: 10px;
 background-color: rgb(1, 38, 66, 0.7);
