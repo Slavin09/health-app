@@ -17,6 +17,9 @@ app.post("/register",async (req,res) => {
     res.send(result)
 })
 
+app.get("/form", async(req,res)=>{
+    res = await fetch('<UserData/>')
+})
 app.listen(port,()=>{
     console.log('Connected successfully at http://localhost:'+port)
 })
@@ -26,10 +29,6 @@ const userSchema = new mongoose.Schema({
     password : String,
     lastUpdated : String
 });
-email: {
-    type: String,
-    required = true
-}
 username: {
     type: String
 }
@@ -39,9 +38,8 @@ wallet_address: {
 }
 const User = mongoose.model('User', userSchema);
 const user_data = new User({
-    email: email,
-    username: username,
-    wallet_address: address,
+    username: "username",
+    wallet_address: "address",
 });
 user_data
     .save()

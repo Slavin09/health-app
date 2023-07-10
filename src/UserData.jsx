@@ -2,66 +2,35 @@ import React from 'react'
 import styled from 'styled-components'
 import { useState, useRef } from "react";
 import {useDropzone} from 'react-dropzone'
+import { Web3Storage, getFilesFromPath, File } from 'web3.storage';
+import { TransactionContext } from "./transactioncontext";
+
 
 function UserData() {
-const [user,setUser]=useState({
-    name: "",address: ""
-});
-const history = useHistory();
-
-let name, value;
-const handleInputs =(e)=>{
-    console.log(e);
-    name=e.target.value;
-    value=e.target.value;
-
-    setUser({...user, [name]:value})
-}
 
 
-let [files, setFile] = useState([])
-const {getRootProps, getInputProps}= useDropzone({
-    accept: "image/*",
-    onDrop: (acceptedFiles) => {
-        setFile(
-            acceptedFiles.map(file => Object.assign(file, {
-                preview: URL.createObjectURL(file)
-            }))
-        )
-        console.log(acceptedFiles);
-    }
-})
 
-const {NavLink,useHistory} = require('react-router-dom');
-const PostData =async (e,res) => {
-    e.preventDefault();
-    const {username,wallet_address} = user;
-    const res = await fetch("/UserData",{
-        method:"POST",
-        headers:{
-            "Content-Type" : "application/json"
-        },
-        body:JSON.stringify({
-            username: username,
-            wallet_address: address
-        })
-    });
+  async function createProfile(){
+    let getName=document.getElementById("Name").value.toString()
+    let getAddress=document.getElementById("Address").value.toString();
+    console.log(getName);
+    console.log(getAddress);
+  }
 
-    const res = await res.json();
-    if (data.status === 422 || !data ){
-        window.alert("Invalid registration");
-        console.log("Invalid registration");
-    }
-    else {
-        window.alert("Successful registration");
-        console.log("Successful registration");
-        history.push("/login");
-    }
-}
-
-const images=files.map(file => (
-<img className='Uploaded-Img' key={file.name} src={file.preview} alt="image" />
-))
+    const client = new Web3Storage({ token:'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJkaWQ6ZXRocjoweDE0NGUwZjM1NjE5MmNGMjkzY0Y2RjM5ODI5MTNFYjVFQzE4OGE3NTkiLCJpc3MiOiJ3ZWIzLXN0b3JhZ2UiLCJpYXQiOjE2ODg4ODY5NjI4MjYsIm5hbWUiOiJFbmlnbWFATWVkaWNvcmRzIn0.zZXBJmtzm3F96eEimIoTIVg78QaR4ixqjJxbfqaOurU'});
+    const [files, setFiles] = useState([]);
+  
+    const onDrop = async (acceptedFiles) => {
+      setFiles(acceptedFiles);
+      const cid = await client.put(acceptedFiles, { wrapWithDirectory: true });
+      console.log('Content ID (CID):', cid);
+    };
+  
+    const { getRootProps, getInputProps } = useDropzone({ onDrop });
+  
+    const images = files.map((file) => (
+      <img className='Uploaded-Img' key={file.name} src={URL.createObjectURL(file)} alt='image' />
+    ));
 
   
   return (
@@ -72,19 +41,29 @@ const images=files.map(file => (
                     <h1>Search Patient</h1>
                     <form action= " "> 
                     <div class="search">
-                        <input placeholder="Enter Name..." type="text" id="Name"/>
-                        <input placeholder="Enter Address..." type="text" id="Address"/>
+                        <input placeholder="Enter Name..." type="text" className='form-control' id="Name"/>
+                        <input placeholder="Enter Address..." type="text" className='form-control' id="Address"/>
                     </div>
-                    <button type="submit">Search</button>
+                    <button onClick={createProfile} type="submit">Search</button>
                     </form>
                 </Search>
                 <Form>
-                    <h1>Enter Prescription</h1>
+                    <h1>Upload Data</h1>
                     <form >
+                    <div className='form'>
+                            <div class="ID">
+                                <input placeholder="Name" type="text"/>
+                            </div>
+                            <div class='CD'>
+                                <input placeholder="Wallet Adress" type="text"/>
+                            </div>
+                            <div class="RD">
+                                <input placeholder="Enter Symptoms: headache, chills...." type="text"/>
+                            </div>
+                            </div>
                         <Drag>
                         <div class="container" {...getRootProps()}> 
-                        <div class="header" className="dropzone"> 
-                            
+                        <div class="header" className='dropzone'>
                             <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><g id="SVGRepo_bgCarrier" stroke-width="0"></g><g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"></g><g id="SVGRepo_iconCarrier"> 
                             <path d="M7 10V9C7 6.23858 9.23858 4 12 4C14.7614 4 17 6.23858 17 9V10C19.2091 10 21 11.7909 21 14C21 15.4806 20.1956 16.8084 19 17.5M7 10C4.79086 10 3 11.7909 3 14C3 15.4806 3.8044 16.8084 5 17.5M7 10C7.43285 10 7.84965 10.0688 8.24006 10.1959M12 12V21M12 12L15 15M12 12L9 15" stroke="#000000" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"></path> </g></svg> <p>Drop files to Upload!</p>
                         </div> 
@@ -114,7 +93,7 @@ const Drag=styled.div`
 `
 
 const Container=styled.div`
-height: 100vh;
+height: 150vh;
 width: 100%;
 background-image: linear-gradient(40deg, rgb(0, 3, 6), rgb(1, 42, 73));
 display: flex;
@@ -130,6 +109,9 @@ h1{
     flex-wrap: wrap;
     justify-content: space-evenly;
     margin: 5%;
+}
+.RD{
+
 }
 input[type="text"] {
   width: 400px;
@@ -224,14 +206,14 @@ h1{
 
 const RefBox=styled.div`
 width: 100%;
-height: 100vh;
+height: 150vh;
 display: flex;
 justify-content: center;
 align-items: center;
 `
 const SubBox=styled.div`
 width: 80rem;
-height: 90vh;
+height: 120vh;
 margin: auto;
 box-shadow: 10px;
 background-color: rgb(1, 38, 66, 0.7);

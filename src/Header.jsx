@@ -9,7 +9,7 @@ function Header() {
         <Nav className="is-sstuck">
             <NavMenu>
               <a>
-              <UserImg src="/public/UserImg.jpg" alt='User Image'/>
+              <UserImg src="/public/MEDHUB_logo.png" alt='User Image'/>
               </a>
             <a href=''>
                 <span>Home</span>
@@ -101,6 +101,7 @@ display: flex;
 align-items: center;
 `
 const UserImg=styled.img`
-height: 48px;
+height: 300px;
 border-radius: 50px;
+margin: -80px;
 `

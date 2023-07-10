@@ -1,0 +1,105 @@
+[
+	{
+		"inputs": [
+			{
+				"internalType": "address",
+				"name": "wallet",
+				"type": "address"
+			}
+		],
+		"name": "removeUser",
+		"outputs": [],
+		"stateMutability": "nonpayable",
+		"type": "function"
+	},
+	{
+		"inputs": [
+			{
+				"internalType": "address",
+				"name": "wallet",
+				"type": "address"
+			},
+			{
+				"internalType": "string",
+				"name": "user",
+				"type": "string"
+			},
+			{
+				"internalType": "string",
+				"name": "email",
+				"type": "string"
+			},
+			{
+				"internalType": "string",
+				"name": "hashy",
+				"type": "string"
+			},
+			{
+				"internalType": "string",
+				"name": "ci",
+				"type": "string"
+			}
+		],
+		"name": "saveUser",
+		"outputs": [],
+		"stateMutability": "nonpayable",
+		"type": "function"
+	},
+	{
+		"inputs": [
+			{
+				"internalType": "address",
+				"name": "wallet",
+				"type": "address"
+			},
+			{
+				"internalType": "uint256",
+				"name": "option",
+				"type": "uint256"
+			},
+			{
+				"internalType": "string",
+				"name": "data",
+				"type": "string"
+			}
+		],
+		"name": "updateUser",
+		"outputs": [],
+		"stateMutability": "nonpayable",
+		"type": "function"
+	},
+	{
+		"inputs": [
+			{
+				"internalType": "address",
+				"name": "",
+				"type": "address"
+			}
+		],
+		"name": "wallets",
+		"outputs": [
+			{
+				"internalType": "string",
+				"name": "username",
+				"type": "string"
+			},
+			{
+				"internalType": "string",
+				"name": "email",
+				"type": "string"
+			},
+			{
+				"internalType": "string",
+				"name": "hash_hash",
+				"type": "string"
+			},
+			{
+				"internalType": "string",
+				"name": "cid",
+				"type": "string"
+			}
+		],
+		"stateMutability": "view",
+		"type": "function"
+	}
+]
